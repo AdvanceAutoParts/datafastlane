@@ -1,0 +1,7 @@
+﻿id,testCaseName,subjectTextToTrim,expectedResultTrim,expectedResultLTrim,expectedResultRTrim
+1,NothingToTrim,NoWhiteSpaceHereToTrim,NoWhiteSpaceHereToTrim,NoWhiteSpaceHereToTrim,NoWhiteSpaceHereToTrim
+2,TrimLWhiteSpace,   WhiteSpaceOnLeft,WhiteSpaceOnLeft,WhiteSpaceOnLeft,   WhiteSpaceOnLeft
+3,TrimRWhiteSpace,WhiteSpaceOnRight   ,WhiteSpaceOnRight,WhiteSpaceOnRight   ,WhiteSpaceOnRight
+4,TrimLRWhiteSpace,   WhiteSpaceOnBothSides   ,WhiteSpaceOnBothSides,WhiteSpaceOnBothSides   ,   WhiteSpaceOnBothSides
+5,ComplexStringLRWhiteSpace,   This is a sentence with White Space on both sides.   ,This is a sentence with White Space on both sides.,This is a sentence with White Space on both sides.   ,   This is a sentence with White Space on both sides.
+6,DoubleQuoteComplexStringLRWhiteSpace,"   This is a sentence with White Space on both sides.   ","This is a sentence with White Space on both sides.","This is a sentence with White Space on both sides.   ","   This is a sentence with White Space on both sides."

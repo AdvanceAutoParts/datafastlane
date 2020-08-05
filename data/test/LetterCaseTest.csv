@@ -1,0 +1,4 @@
+id,testCaseName,subjectTextForLetterCase,expectedResultUpperCase,expectedResultLowerCase,expectedResultInitialCap
+1,SubjectAllLowerCase,abcdef ghijkl mnopqr stuvwx yz,ABCDEF GHIJKL MNOPQR STUVWX YZ,abcdef ghijkl mnopqr stuvwx yz,Abcdef Ghijkl Mnopqr Stuvwx Yz
+2,SubjectAllUpperCase,ABCDEF GHIJKL MNOPQR STUVWX YZ,ABCDEF GHIJKL MNOPQR STUVWX YZ,abcdef ghijkl mnopqr stuvwx yz,Abcdef Ghijkl Mnopqr Stuvwx Yz
+3,MixedCaseWithNumbersSymbols,"John Smith, 385 S. West St, Raleigh, NC 27603","JOHN SMITH, 385 S. WEST ST, RALEIGH, NC 27603","john smith, 385 s. west st, raleigh, nc 27603","John Smith, 385 S. West St, Raleigh, Nc 27603"
