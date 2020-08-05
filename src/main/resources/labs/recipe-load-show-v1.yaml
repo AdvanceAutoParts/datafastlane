@@ -1,0 +1,21 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: books
+    master: local[*]
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    path: data/books/books.csv
+    format: csv
+    options:
+      inferSchema: true
+      header: true
+  - operation: show
+    options:
+      numRows: 5
+      truncate: false
+  - operation: printSchema
+  - operation: countRows

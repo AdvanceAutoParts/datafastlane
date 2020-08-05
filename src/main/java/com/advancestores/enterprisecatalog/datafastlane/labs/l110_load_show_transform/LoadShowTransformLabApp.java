@@ -21,7 +21,7 @@ class LoadShowTransformLabApp {
         long t0 = System.currentTimeMillis();
 
         // Run recipe
-        DataStore store = new DataStore("src/main/resources/recipe-load-show-transform-v1.yaml");
+        DataStore store = new DataStore("src/main/resources/labs/recipe-load-show-transform-v1.yaml");
         status = DataTransformer.transform(store);
 
         log.info("Execution took {} s. Status: {}.", (System.currentTimeMillis() - t0) / 1000.0, status);
