@@ -58,7 +58,7 @@ public class RenameOperation extends CoreOperation {
         }
 
         // Processing
-        log.info("About to rename column '{}' to '{}' in dataframe '{}'", columnName, to, dataframeName);
+        log.debug("About to rename column '{}' to '{}' in dataframe '{}'", columnName, to, dataframeName);
         df = df.withColumnRenamed(columnName, to);
 
         // Post-processing: save results

@@ -19,12 +19,13 @@ public class DropOperation extends CoreOperation {
         long runStart = System.currentTimeMillis();
         DataStore store = super.getStore();
         if (super.isStore()) {
-            // The operation is on the store
+            // The operation is on the store, will drop the container
             String elementToDrop = super.getAttributeName();
             log.info("About to drop {} from store", elementToDrop);
             store.drop(elementToDrop);
         }
         else {
+        	// Drop one column at a time from database
             String elementToDrop = super.getAttributeName();
             String dataframeName = super.getContainerName();
             Dataset<Row> df = store.get(dataframeName);
