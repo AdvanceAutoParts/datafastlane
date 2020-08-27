@@ -1,0 +1,48 @@
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: mysql-connection
+    options:
+      driver: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://mysql_host:3306/${sys:mysql_database}
+      username: mysql_admin
+      password: mysql_pw
+  - operation: postgres-connection
+    options:
+      driver: org.postgresql.Driver
+      url: jdbc:postgres://${env:postgres_host}:${env:postgres_port}/postgres_database
+      username: ${env:postgres_user|admin}
+      password: ${env:postgres_pw}
+  - operation: mongodb-connection
+    options:
+      url: mongodb://${env:mongo_user}:${env:mongo_pw}@10.17.100.100:2501/mongo_database
+- attribute: custom-connection-type
+  operations:
+  - operation: custom-connection
+    options:
+      driver: com.custom.driver
+      host: custom_host
+      port: 12345
+      username: custom_admin
+      password: ${env:custom_pw}
+      database: custom_database
+- attribute: elasticsearch
+  operations:
+  - operation: local
+    options:
+      host: localhost
+      port: 9200
+      enablewanonly: false
+      enablenetssl: false
+  - operation: docker
+    options:
+      host: elasticsearch
+      port: 9200
+      enablewanonly: true
+      enablenetssl: false
+  - operation: aws
+    options:
+      host: ${env:aws_node}
+      enablewanonly: true
+      enablenetssl: false
+      

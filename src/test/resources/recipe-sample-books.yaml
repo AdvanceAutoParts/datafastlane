@@ -1,0 +1,16 @@
+$store: # container
+- attribute: books # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/books/books.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+      quote: '"'
+books:
+- attribute: id
+  operations:
+  - operation: sample
+    fraction: 33%
+  

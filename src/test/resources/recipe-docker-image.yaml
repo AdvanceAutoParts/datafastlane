@@ -1,0 +1,97 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: CSV Recipe used with Dockerfile test
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+$schema:
+- attribute: buyersguide
+  operations:
+  - operation: PROD_BUYERS_GUIDE_ID
+    options:
+      datatype: integer
+      nullable: false
+  - operation: PLA
+    options:
+      datatype: string
+      nullable: true
+  - operation: PART_NUMBER
+    options:
+      datatype: string
+      nullable: true
+  - operation: STRIPPED_PART_NUMBER
+    options:
+      datatype: string
+      nullable: true
+  - operation: FITMENT_DETAILS
+    options:
+      datatype: string
+      nullable: false
+  - operation: DATA_SOURCE_ID
+    options:
+      datatype: string
+      nullable: false
+  - operation: CREATED_ON
+    options:
+      datatype: timestamp
+      nullable: false
+  - operation: CREATED_BY
+    options:
+      datatype: string
+      nullable: false
+  - operation: UPDATED_ON
+    options:
+      datatype: timestamp
+      nullable: false
+  - operation: UPDATED_BY
+    options:
+      datatype: string
+      nullable: false
+  - operation: VERSION
+    options:
+      datatype: string
+      nullable: false
+  - operation: REPLICATED_ON
+    options:
+      datatype: timestamp
+      nullable: false
+  - operation: MAKE
+    options:
+      datatype: string
+      nullable: false
+$connection:
+- attribute: org.elasticsearch.spark.sql
+  operations:
+  - operation: docker
+    options:
+      es.nodes: elasticsearch
+      es.port: 9200
+      es.nodes.wan.only: true
+      es.net.ssl: false
+$store:
+- attribute: buyersguide
+  operations:
+  - operation: load
+    path: /app/data/buyersguide/PROD_BUYERS_GUIDE_SAMPLE.csv
+    format: csv
+    schemaName: buyersguide
+    options:
+      header: true
+      timestampFormat: dd-MMM-yy HH.mm.ss.SSS a
+      escape: '"'
+      charToEscapeQuoteEscaping: '"'
+  - operation: show
+    options:
+      numRows: 5
+      truncate: false
+  - operation: printSchema
+  - operation: save
+    format: org.elasticsearch.spark.sql
+    path: buyersguide  # index name
+    options:
+      connection: docker
+  

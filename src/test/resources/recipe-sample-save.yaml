@@ -1,0 +1,24 @@
+$store: # container
+- attribute: books # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/buyersguide/PROD_BUYERS_GUIDE_SAMPLE.csv # path to file
+    format: csv # format
+    options: # Note: as the goal is to sample, we do not worry too much about formats
+      header: true
+      escape: '"'
+      charToEscapeQuoteEscaping: '"'
+  - operation: show
+  - operation: sample
+    fraction: 10%
+  - operation: repartition
+    to: 1
+  - operation: show
+  - operation: countRows
+  - operation: save
+    mode: Overwrite
+    format: csv
+    path: data/buyersguide/output 
+    options:
+      header: true
+    

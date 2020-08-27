@@ -1,0 +1,40 @@
+# transform
+$store: # container
+- attribute: books # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/books/books.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+- attribute: authors
+  operations:
+  - operation: load
+    path: data/books/authors.csv
+    format: csv
+    options:
+      header: true
+      inferSchema: true
+  - operation: show all
+  - operation: printSchema
+books:
+- attribute: authorId
+  operations:
+  - operation: join
+    with: authors 
+    on: id
+    type: left
+books:
+- attribute: uuid
+  operations:
+  - operation: genUuid
+    with: name, title, id
+$store: # container
+- attribute: books
+  operations:
+  - operation: show
+  - operation: printSchema
+

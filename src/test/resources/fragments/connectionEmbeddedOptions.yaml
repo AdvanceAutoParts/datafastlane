@@ -1,0 +1,6 @@
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: h2
+$import: src/test/resources/fragments/connectionOptions.yaml
+            

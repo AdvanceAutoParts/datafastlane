@@ -1,0 +1,54 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: JDBC recipe used with junit test
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: h2-source
+    options:
+      driver: org.h2.Driver
+      url: jdbc:h2:mem:srcdb;DB_CLOSE_DELAY=-1;IGNORECASE=TRUE
+      user: test
+  - operation: h2-destination
+    options:
+      driver: org.h2.Driver
+      url: jdbc:h2:mem:destdb;DB_CLOSE_DELAY=-1;IGNORECASE=TRUE
+      user: dest
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    format: jdbc
+    options:
+      connection: h2-source
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  - operation: save
+    format: jdbc
+    path: new_books  # table name
+    options:
+      connection: h2-destination
+- attribute: authors
+  operations:
+  - operation: load
+    path: data/books/authors2.csv
+    format: csv
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  - operation: save
+    format: jdbc
+    path: new_authors  # table name
+    options:
+      connection: h2-destination
+  

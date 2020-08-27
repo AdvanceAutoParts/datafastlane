@@ -1,0 +1,49 @@
+
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: VCdb + CarCode
+    master: 'local[*]'
+    options:
+      spark.executor.memory: 4g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 16g
+$store:
+- attribute: Vehicle
+  operations:
+  - operation: load
+    path: /Users/jgp/Documents/Jean-Georges/Work/AAP/Data/vehicle-parquet-snappy/*.parquet
+    format: parquet
+  - operation: show
+  - operation: printSchema
+
+$connection:
+- attribute: org.elasticsearch.spark.sql
+  operations:
+  - operation: es-local
+    options:
+      es.nodes: localhost
+      es.port: 9200
+- attribute: org.elasticsearch.spark.sql
+  operations:
+  - operation: es-remote
+    options:
+      es.nodes: elasticsearch
+      es.port: 9200
+      es.nodes.wan.only: true
+      es.net.ssl: false
+
+# Saving to Elasticsearch
+# -----------------------
+
+$store:
+- attribute: Vehicle
+  operations:
+  - operation: save
+    format: org.elasticsearch.spark.sql
+    mode: Overwrite
+    path: vehicleconfigurations
+    options:
+      connection: es-local
+      

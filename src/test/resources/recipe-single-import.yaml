@@ -1,0 +1,28 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: Recipe used with junit test
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+      spark.driver.host: 127.0.0.1
+$import: src/test/resources/fragments/connection.yaml
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    format: jdbc
+    options:
+      connection: h2
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  - operation: save
+    format: csv
+    path: src/test/resources/JUNIT_BOOKS.csv  # path that may contain multiple parts
+    options:
+      header: true
+  

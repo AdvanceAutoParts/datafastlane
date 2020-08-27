@@ -1,0 +1,18 @@
+$store: # container
+- attribute: books # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/books/books.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+      quote: '"'
+  - operation: show
+  - operation: printSchema
+books:
+- attribute: id
+  operations:
+  - operation: rename
+    to: bookId
+  - operation: printSchema

@@ -1,4 +1,4 @@
-package com.advancestores.enterprisecatalog.datafastlane.spark_utils;
+package com.advancestores.enterprisecatalog.datafastlane.spark_udf;
 
 import java.util.List;
 import java.util.UUID;

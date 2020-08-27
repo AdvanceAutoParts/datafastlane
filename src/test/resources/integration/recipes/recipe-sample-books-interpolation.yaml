@@ -1,0 +1,20 @@
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    path: ${sys:s3data}books.csv  # if set in the env, make sure the code copies to properties
+    format: csv
+    options:
+      aws_access_key_id: ${sys:aws_access_key_id}  # if set in the env, make sure the code copies to properties
+      aws_secret_access_key: ${sys:aws_secret_access_key}  # if set in the env, make sure the code copies to properties
+      aws_session_token: ${sys:aws_session_token}  # if set in the env, make sure the code copies to properties
+      aws_role_arn: ${sys:aws_role_arn}  # if set in the env, make sure the code copies to properties
+      aws_region: ${sys:aws_region}  # if set in the env, make sure the code copies to properties
+      header: true
+      inferSchema: true
+      quote: '"'
+books:
+- attribute: id
+  operations:
+  - operation: sample
+    fraction: 33%

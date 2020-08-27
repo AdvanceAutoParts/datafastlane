@@ -1,0 +1,42 @@
+# transform
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: Test 3 Fast Data Pipeline
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+$store: # container
+- attribute: books # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/books/books.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+- attribute: authors
+  operations:
+  - operation: load
+    path: data/books/authors.csv
+    format: csv
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+books:
+- attribute: authorId
+  operations:
+  - operation: join
+    with: authors
+    on: id
+    type: left
+  - operation: show
+  - operation: printSchema
+  

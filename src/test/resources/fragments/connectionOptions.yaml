@@ -1,0 +1,4 @@
+    options:
+      driver: org.h2.Driver
+      url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;IGNORECASE=TRUE
+      user: test

@@ -1,0 +1,17 @@
+# transform
+$store: # container
+- attribute: letterCaseTest # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/test/LetterCaseTest.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+letterCaseTest:
+  - attribute: subjectTextForLetterCase
+    operations:
+    - operation: upperCase
+    - operation: show

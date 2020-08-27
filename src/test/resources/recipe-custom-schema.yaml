@@ -1,0 +1,45 @@
+$schema:
+- attribute: buyersguide
+  operations:
+  - operation: string_field_t
+    options:
+      datatype: string
+      nullable: true
+  - operation: integer_field_t
+    options:
+      datatype: integer
+      nullable: true
+  - operation: timestamp_field_f
+    options:
+      datatype: timestamp
+  - operation: date_field_f
+    options:
+      datatype: date
+  - operation: boolean_field_t
+    options:
+      datatype: boolean
+      nullable: true
+  - operation: binary_field_f
+    options:
+      datatype: binary
+      nullable: false
+  - operation: double_field_t
+    options:
+      datatype: double
+      nullable: true
+  - operation: float_field_t
+    options:
+      datatype: float
+      nullable: true
+  - operation: byte_field_t
+    options:
+      datatype: byte
+      nullable: true
+  - operation: long_field_t
+    options:
+      datatype: long
+      nullable: true
+  - operation: short_field_f
+    options:
+      datatype: short
+      nullable: false

@@ -1,0 +1,19 @@
+# transform
+$store: # container
+- attribute: trimTest # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/test/TrimTest.csv # path to file
+    format: csv # format
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+trimTest:
+  - attribute: subjectTextToTrim
+    operations:
+    - operation: trim
+      options:
+        right: true
+    - operation: show

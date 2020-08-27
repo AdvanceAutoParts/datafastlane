@@ -1,0 +1,18 @@
+$import: src/test/resources/fragments/spark.yaml
+$import: src/test/resources/fragments/connectionEmbeddedOptions.yaml
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    format: jdbc
+    options:
+      connection: h2
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  - operation: save
+    format: csv
+    path: src/test/resources/JUNIT_BOOKS.csv  # path that may contain multiple parts
+    options:
+      header: true
+  

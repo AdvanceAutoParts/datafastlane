@@ -1,0 +1,29 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: Recipe used with junit test
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+      spark.driver.host: 127.0.0.1
+$store:
+- attribute: authors
+  operations:
+  - operation: load
+    path: data/books/authors.csv
+    format: csv
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  - operation: save
+    format: csv
+    mode: Overwrite
+    path: src/test/resources/JUNIT_AUTHORS.csv  # path that may contain multiple parts
+    options:
+      header: true
+  

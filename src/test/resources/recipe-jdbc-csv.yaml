@@ -1,0 +1,39 @@
+$spark:
+- attribute: session
+  operations:
+  - operation: create
+    appName: Simple JDBC Recipe
+    master: local[*]
+    options:
+      spark.executor.memory: 8g
+      spark.memory.offHeap.enabled: true
+      spark.memory.offHeap.size: 32g
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: h2
+    options:
+      driver: org.h2.Driver
+      url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;IGNORECASE=TRUE
+      user: test
+$store:
+- attribute: books
+  operations:
+  - operation: load
+    format: jdbc
+    options:
+      connection: h2
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+- attribute: authors
+  operations:
+  - operation: load
+    path: data/books/authors2.csv
+    format: csv
+    options:
+      header: true
+      inferSchema: true
+  - operation: show
+  - operation: printSchema
+  
