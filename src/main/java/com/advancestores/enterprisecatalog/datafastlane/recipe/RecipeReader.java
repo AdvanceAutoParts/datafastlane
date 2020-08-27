@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.advancestores.enterprisecatalog.datafastlane.FastLaneException;
+import com.fasterxml.jackson.core.JsonFactory.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class RecipeReader {
@@ -56,13 +58,13 @@ public class RecipeReader {
                 }
             }
             else {
-                String errMsg = "The recipe file with name '" + filename + "' does not exist.  Cannot continue.";
+                String errMsg = "The recipe file with name '" + filename + "' does not exist. Cannot continue.";
                 log.error(errMsg);
                 throw new FastLaneException(errMsg);
             }
         }
         else {
-            String errMsg = "The recipe file name is null.  Cannot continue.";
+            String errMsg = "The recipe file name is null. Cannot continue.";
             log.error(errMsg);
             throw new FastLaneException(errMsg);
         }

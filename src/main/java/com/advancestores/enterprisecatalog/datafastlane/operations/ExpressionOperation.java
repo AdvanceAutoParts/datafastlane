@@ -1,6 +1,6 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
-import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.*;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -11,19 +11,18 @@ import com.advancestores.enterprisecatalog.datafastlane.DataStore;
 import com.advancestores.enterprisecatalog.datafastlane.recipe.Operation;
 
 /**
- * Operation to generate a literal value. The syntax is:
+ * Operation to generate a SQL expression. The syntax is:
  * 
  * <pre>
- * books:
- * - attribute: col
+ * - attribute: 'GPS Speed (Meters/second)'
  *   operations:
- *   - operation: lit
- *     with: value_of_the_column
+ *   - operation: expression
+ *     using: "'GPS Speed (MPH)' / 2.237"
  * </pre>
  *
  */
-public class LitOperation extends CoreOperation {
-    private static final Logger log = LoggerFactory.getLogger(LitOperation.class);
+public class ExpressionOperation extends CoreOperation {
+    private static final Logger log = LoggerFactory.getLogger(ExpressionOperation.class);
 
     @Override
     public boolean run() {
@@ -54,14 +53,15 @@ public class LitOperation extends CoreOperation {
 
         String newColumnName = super.getAttributeName();
 
-        String value = operationDefinition.getWith();
-        if (value == null || value.isEmpty()) {
-            log.error("No value for literal");
+        String expression = operationDefinition.getFrom();
+        if (expression == null || expression.isEmpty()) {
+            log.error("No value for expression");
             return false;
         }
+        log.info("Expression to evaluate: [{}]", expression);
 
         // real run!      
-        df = df.withColumn(newColumnName, lit(store.expandProperties(value)));
+        df = df.withColumn(newColumnName, expr(store.expandProperties(expression)));
         store.add(dataframeName, df);
 
         log.debug("{} completed in {}s", this.getClass().getName(), (System.currentTimeMillis() - runStart) / 1000.0);

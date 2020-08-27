@@ -42,7 +42,7 @@ public abstract class CoreOperation implements Operationable {
         ReaderContext readerCtx = new ReaderContext();
 
         if (StringUtils.isEmpty(format)) {
-            String errMsg = "The data format was not specified.  Cannot continue.";
+            String errMsg = "The data format was not specified. Cannot continue.";
             log.error(errMsg);
             throw new FastLaneException(errMsg);
         }
@@ -109,9 +109,9 @@ public abstract class CoreOperation implements Operationable {
             for (Option option : options) {
                 reader = reader.option(option.getKey(), option.getValue());
             }
-
+            
             readerCtx = readerCtx.setReader(reader)
-                                 .setFilePath(filePath)
+                                 .setFilePath(store.expandProperties(filePath))
                                  .setDataframeName(dataframeName)
                                  .setConnectionName(connectionName);
         }
