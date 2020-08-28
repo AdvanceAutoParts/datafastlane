@@ -58,7 +58,7 @@ public class ExpressionOperation extends CoreOperation {
             log.error("No value for expression");
             return false;
         }
-        log.info("Expression to evaluate: [{}]", expression);
+        log.info("Expression to evaluate: [{}] expanded to: [{}]", expression, store.expandProperties(expression));
 
         // real run!      
         df = df.withColumn(newColumnName, expr(store.expandProperties(expression)));
