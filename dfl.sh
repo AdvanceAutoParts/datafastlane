@@ -17,15 +17,14 @@ fi
 if [[ "$_java" ]]; then
     version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
     if [[ "$version" > "11" ]]; then
-        echo "Java version is above 11 ... [pass]"
+        # TBD enable this for verbose exec
+        # echo "Java version is above 11 ... [pass]"
+        echo -n ""
     else         
         echo Java is too old, requires Java 11, found "$version" [fail]
         exit -1
     fi
 fi
 
-echo $*
-pwd
 mvn -q exec:exec -Dexec.workingdir=$BASEDIR -Dexec.executable=_java -DADD_ARGS="$*" -Dlog4j.configuration=file:$BASEDIR/src/main/resources/log4j.properties -Dmaven.test.skip=true
-
 cd $ORIGDIR
