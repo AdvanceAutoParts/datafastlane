@@ -1,6 +1,14 @@
 # Data in the Fast Lane
 
-## Installation of first execution
+## What can I do with Data in the Fast Lane (DFL)?
+
+TBD
+
+## What is Data in the Fast Lane (DFL)?
+
+TBD
+
+## Installation and first execution
 
 Once you have cloned the source code, run:
 
