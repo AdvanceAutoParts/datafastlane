@@ -2,7 +2,7 @@
 
 ## What can I do with Data in the Fast Lane (DFL)?
 
-![What is Data in the Fast Lane](https://github.com/AdvanceAutoParts/datafastlane/blob/master/doc/What%20is%20Data%20in%20the%20Fast%20Lane.png?raw=true)
+![What is Data in the Fast Lane](https://github.com/AdvanceAutoParts/datafastlane/blob/master/doc/what_can_i_do_with_data_in_the_fast_lane_dfl.png?raw=true)
 
 ## What is Data in the Fast Lane (DFL)?
 
