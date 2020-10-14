@@ -110,13 +110,13 @@ public class DataTransformer {
             ctx.addProperty(option);
           }
         } else {
-          log.info("No operations defined for the Spark container.");
+          log.warn("No operations defined for the Spark container.");
         }
       } else {
-        log.info("No session attribute defined for the Spark container.");
+        log.warn("No session attribute defined for the Spark container.");
       }
     } else {
-      log.info("Spark container is null.");
+      log.warn("Spark container is null.");
     }
 
     return ctx;

@@ -117,7 +117,7 @@ public class DataFastLaneApp {
 
         // TODO add support for a silent / quiet mode
         System.out.printf(
-            "DFL completed in %.1d seconds with a status of %b.",
+            "DFL completed in %.1f seconds with a status of %b.",
             ((System.currentTimeMillis() - transformStart) / 1000), status);
 
         log.debug(

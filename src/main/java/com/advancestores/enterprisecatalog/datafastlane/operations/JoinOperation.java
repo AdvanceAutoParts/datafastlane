@@ -74,10 +74,13 @@ public class JoinOperation extends CoreOperation {
           df.col(columnName).equalTo(rightDf.col(rightColumnName)),
           joinType);
     } catch (Exception e) {
+      // error while performing the join: tries to provide as much information as possible
+      
       log.error("An error occured while performing a join operation: {}",
           e.getMessage(), e);
       log.info("Execution plan written to stdout");
       df.explain();
+      
       log.info("Left dataframe info:");
       SparkUtils.debug(df);
       log.info("Right dataframe info:");

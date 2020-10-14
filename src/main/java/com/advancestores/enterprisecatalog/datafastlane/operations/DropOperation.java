@@ -22,7 +22,7 @@ public class DropOperation extends CoreOperation {
     if (super.isStore()) {
       // The operation is on the store, will drop the container
       String elementToDrop = super.getAttributeName();
-      log.info("About to drop {} from store", elementToDrop);
+      log.debug("About to drop {} from store", elementToDrop);
       store.drop(elementToDrop);
     } else {
       // Drop one column at a time from database

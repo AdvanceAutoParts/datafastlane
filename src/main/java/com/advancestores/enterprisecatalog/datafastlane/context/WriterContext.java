@@ -184,7 +184,7 @@ public class WriterContext {
     long saveStart = System.currentTimeMillis();
 
     try {
-      log.info(">>>> Saving using:\n{}", toString());
+      log.debug(">>>> Saving using:\n{}", toString());
 
       // the text format requires that all columns be converted to a single
       // string
@@ -195,7 +195,7 @@ public class WriterContext {
         writer.save(destination);
       }
 
-      log.info(">>>> Save completed in {} seconds",
+      log.debug(">>>> Save completed in {} seconds",
           ((System.currentTimeMillis() - saveStart) / 1000));
 
       return (isMergable() ? merge() : true);
