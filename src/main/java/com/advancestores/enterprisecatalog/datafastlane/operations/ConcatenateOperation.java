@@ -1,5 +1,9 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.concat;
+import static org.apache.spark.sql.functions.lit;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +12,6 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.concat;
-import static org.apache.spark.sql.functions.lit;
 
 import com.advancestores.enterprisecatalog.datafastlane.DataStore;
 import com.advancestores.enterprisecatalog.datafastlane.recipe.Operation;

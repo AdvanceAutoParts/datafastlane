@@ -1,6 +1,5 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
-import org.apache.spark.sql.AnalysisException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;

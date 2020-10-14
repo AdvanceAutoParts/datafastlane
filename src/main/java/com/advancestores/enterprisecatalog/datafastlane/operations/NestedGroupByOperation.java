@@ -1,6 +1,5 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
-import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.collect_list;
 import static org.apache.spark.sql.functions.struct;
 

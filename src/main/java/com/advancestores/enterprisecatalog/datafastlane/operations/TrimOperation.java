@@ -1,16 +1,17 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
-import com.advancestores.enterprisecatalog.datafastlane.DataStore;
-import com.advancestores.enterprisecatalog.datafastlane.recipe.Operation;
-import com.esotericsoftware.minlog.Log;
+import static org.apache.spark.sql.functions.ltrim;
+import static org.apache.spark.sql.functions.rtrim;
+import static org.apache.spark.sql.functions.trim;
+
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.apache.spark.sql.functions.trim;
-import static org.apache.spark.sql.functions.ltrim;
-import static org.apache.spark.sql.functions.rtrim;
+import com.advancestores.enterprisecatalog.datafastlane.DataStore;
+import com.advancestores.enterprisecatalog.datafastlane.recipe.Operation;
+import com.esotericsoftware.minlog.Log;
 
 /**
  * Operation to trim whitespace preceding or succeeding a string

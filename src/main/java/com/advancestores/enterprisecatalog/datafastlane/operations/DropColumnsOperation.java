@@ -1,12 +1,8 @@
 package com.advancestores.enterprisecatalog.datafastlane.operations;
 
-import static org.apache.spark.sql.functions.array;
-import static org.apache.spark.sql.functions.callUDF;
-
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;
