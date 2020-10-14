@@ -20,48 +20,50 @@ import org.junit.jupiter.api.Test;
  * Uses a recipe file that executes a CSV load and a JSON save.
  */
 class Csv2JsonTransformSaveTest {
-    private static final long EXPECTED_AUTHORS_COUNT = 15;  // do not include header
+  private static final long EXPECTED_AUTHORS_COUNT = 15; // do not include
+                                                         // header
 
-    @BeforeAll
-    public static void setup() throws Exception {
-    }
+  @BeforeAll
+  public static void setup() throws Exception {
+  }
 
-    @AfterAll
-    public static void tearDown() throws Exception {
-    }
+  @AfterAll
+  public static void tearDown() throws Exception {
+  }
 
-    @Test
-    void test() throws Exception {
-        DataStore store = new DataStore("src/test/resources/recipe-csv2json-save.yaml");
+  @Test
+  void test() throws Exception {
+    DataStore store =
+        new DataStore("src/test/resources/recipe-csv2json-save.yaml");
 
-        DataTransformer.transform(store);
+    DataTransformer.transform(store);
 
-        assertEquals(1, store.getDataframeCount());
+    assertEquals(1, store.getDataframeCount());
 
-        Dataset<Row> authors = store.get("authors");
-        assertNotNull(authors);
-        assertEquals(EXPECTED_AUTHORS_COUNT, authors.count());
+    Dataset<Row> authors = store.get("authors");
+    assertNotNull(authors);
+    assertEquals(EXPECTED_AUTHORS_COUNT, authors.count());
 
-        // make sure new CSV file was created
-        String filename = "src/test/resources/JUNIT_AUTHORS.json";
-        File file = new File(filename);
-        long fileRowCount = 0;
+    // make sure new CSV file was created
+    String filename = "src/test/resources/JUNIT_AUTHORS.json";
+    File file = new File(filename);
+    long fileRowCount = 0;
 
-        try {
-            Path path = Paths.get(filename);
-            fileRowCount = Files.lines(path).count();
-        }
-        catch (Exception e) {
-            if (file.exists()) {
-                assertTrue(file.delete());
-            }
-
-            fail("Unable to count lines in file '" + filename + "'.\n" + e.getMessage());
-        }
-
+    try {
+      Path path = Paths.get(filename);
+      fileRowCount = Files.lines(path).count();
+    } catch (Exception e) {
+      if (file.exists()) {
         assertTrue(file.delete());
+      }
 
-        assertEquals(EXPECTED_AUTHORS_COUNT, fileRowCount);
+      fail("Unable to count lines in file '" + filename + "'.\n"
+          + e.getMessage());
     }
+
+    assertTrue(file.delete());
+
+    assertEquals(EXPECTED_AUTHORS_COUNT, fileRowCount);
+  }
 
 }

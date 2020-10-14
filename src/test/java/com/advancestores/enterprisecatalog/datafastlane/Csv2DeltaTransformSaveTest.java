@@ -20,62 +20,63 @@ import org.junit.jupiter.api.Test;
  * Uses a recipe file that executes a CSV load and a Delta Lake save.
  */
 class Csv2DeltaTransformSaveTest {
-    private static final long EXPECTED_BG_COUNT = 206263;  // do not include header
+  private static final long EXPECTED_BG_COUNT = 206263; // do not include
+                                                        // header
 
-    @BeforeAll
-    public static void setup() throws Exception {
+  @BeforeAll
+  public static void setup() throws Exception {
+  }
+
+  @AfterAll
+  public static void tearDown() throws Exception {
+  }
+
+  @Test
+  void test() throws Exception {
+    DataStore store =
+        new DataStore("src/test/resources/recipe-csv2delta-save.yaml");
+
+    DataTransformer.transform(store);
+
+    assertEquals(1, store.getDataframeCount());
+
+    // make sure new delta lake directory was created
+    String parentFolderName = "data/deltalake";
+    String folderName = parentFolderName + "/authors";
+    File parentFolder = new File(parentFolderName);
+    File authorsFolder = new File(folderName);
+    Iterator<File> files = FileUtils.iterateFiles(authorsFolder,
+        new WildcardFileFilter("part-*"), null);
+    long fileCount = 0;
+
+    while (files.hasNext()) {
+      files.next();
+      fileCount++;
     }
 
-    @AfterAll
-    public static void tearDown() throws Exception {
+    System.out.println("Delta Lake Files Generated: " + fileCount);
+
+    if (fileCount == 0) {
+      FileUtils.deleteDirectory(parentFolder);
+      assertTrue(fileCount > 0);
+    } else {
+      SparkSession session = SparkSession.builder()
+          .appName("junit test")
+          .config("spark.executor.memory", "8g")
+          .config("spark.memory.offHeap.enabled", "true")
+          .config("spark.memory.offHeap.size", "32g")
+          .master("local[*]")
+          .getOrCreate();
+
+      try {
+        Dataset<Row> dataframe = session.read().parquet(folderName);
+        assertEquals(EXPECTED_BG_COUNT, dataframe.count());
+      } catch (Exception e) {
+        fail("An error occurred while reading " + folderName
+            + " Delta Lake file.\n" + e.getMessage());
+      } finally {
+        FileUtils.deleteDirectory(parentFolder);
+      }
     }
-
-    @Test
-    void test() throws Exception {
-        DataStore store = new DataStore("src/test/resources/recipe-csv2delta-save.yaml");
-
-        DataTransformer.transform(store);
-
-        assertEquals(1, store.getDataframeCount());
-
-        // make sure new delta lake directory was created
-        String parentFolderName = "data/deltalake";
-        String folderName = parentFolderName + "/authors";
-        File parentFolder = new File(parentFolderName);
-        File authorsFolder = new File(folderName);
-        Iterator<File> files = FileUtils.iterateFiles(authorsFolder, new WildcardFileFilter("part-*"), null);
-        long fileCount = 0;
-
-        while (files.hasNext()) {
-            files.next();
-            fileCount++;
-        }
-
-        System.out.println("Delta Lake Files Generated: " + fileCount);
-
-        if (fileCount == 0) {
-            FileUtils.deleteDirectory(parentFolder);
-            assertTrue(fileCount > 0);
-        }
-        else {
-            SparkSession session = SparkSession.builder()
-                                               .appName("junit test")
-                                               .config("spark.executor.memory", "8g")
-                                               .config("spark.memory.offHeap.enabled", "true")
-                                               .config("spark.memory.offHeap.size", "32g")
-                                               .master("local[*]")
-                                               .getOrCreate();
-
-            try {
-                Dataset<Row> dataframe = session.read().parquet(folderName);
-                assertEquals(EXPECTED_BG_COUNT, dataframe.count());
-            }
-            catch (Exception e) {
-                fail("An error occurred while reading " + folderName + " Delta Lake file.\n" + e.getMessage());
-            }
-            finally {
-                FileUtils.deleteDirectory(parentFolder);
-            }
-        }
-    }
+  }
 }

@@ -15,60 +15,59 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class RecipeReader {
-    private static final Logger log = LoggerFactory.getLogger(RecipeReader.class);
+  private static final Logger log =
+      LoggerFactory.getLogger(RecipeReader.class);
 
-    public static Recipe read(InputStream in) {
-        Recipe rules = null;
+  public static Recipe read(InputStream in) {
+    Recipe rules = null;
 
-        if (in != null) {
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+    if (in != null) {
+      ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-            try {
-                rules = mapper.readValue(in, Recipe.class);
-            }
-            catch (IOException e) {
-                log.error("Error while reading recipe's input stream: {}", e.getMessage(), e);
-            }
-        }
-        else {
-            String errMsg = "The input stream is null.  Nothing to process.";
-            log.warn(errMsg);
-            throw new FastLaneException(errMsg);
-        }
-
-        return rules;
+      try {
+        rules = mapper.readValue(in, Recipe.class);
+      } catch (IOException e) {
+        log.error("Error while reading recipe's input stream: {}",
+            e.getMessage(), e);
+      }
+    } else {
+      String errMsg = "The input stream is null.  Nothing to process.";
+      log.warn(errMsg);
+      throw new FastLaneException(errMsg);
     }
 
-    public static Recipe read(String filename) {
-        Recipe rules = null;
+    return rules;
+  }
 
-        if (StringUtils.isNotEmpty(filename)) {
-            File recipeFile = new File(filename);
+  public static Recipe read(String filename) {
+    Recipe rules = null;
 
-            if (recipeFile.exists()) {
-                ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+    if (StringUtils.isNotEmpty(filename)) {
+      File recipeFile = new File(filename);
 
-                try {
-                    rules = mapper.readValue(recipeFile, Recipe.class);
-                }
-                catch (IOException e) {
-                    String errMsg = "Error while reading recipe file " + filename + " : " + e.getMessage();
-                    log.error(errMsg, e);
-                    throw new FastLaneException(errMsg);
-                }
-            }
-            else {
-                String errMsg = "The recipe file with name '" + filename + "' does not exist. Cannot continue.";
-                log.error(errMsg);
-                throw new FastLaneException(errMsg);
-            }
+      if (recipeFile.exists()) {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+        try {
+          rules = mapper.readValue(recipeFile, Recipe.class);
+        } catch (IOException e) {
+          String errMsg = "Error while reading recipe file " + filename
+              + " : " + e.getMessage();
+          log.error(errMsg, e);
+          throw new FastLaneException(errMsg);
         }
-        else {
-            String errMsg = "The recipe file name is null. Cannot continue.";
-            log.error(errMsg);
-            throw new FastLaneException(errMsg);
-        }
-
-        return rules;
+      } else {
+        String errMsg = "The recipe file with name '" + filename
+            + "' does not exist. Cannot continue.";
+        log.error(errMsg);
+        throw new FastLaneException(errMsg);
+      }
+    } else {
+      String errMsg = "The recipe file name is null. Cannot continue.";
+      log.error(errMsg);
+      throw new FastLaneException(errMsg);
     }
+
+    return rules;
+  }
 }

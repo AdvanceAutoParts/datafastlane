@@ -51,7 +51,7 @@ public class DataStore {
                                     // where $import refs are replaced
 
   public DataStore(String rawRecipePath) {
-    log.info("Processing recipe file: {}", rawRecipePath);
+    log.debug("Processing recipe file: {}", rawRecipePath);
 
     // Basic init
     store = new HashMap<>();
@@ -437,7 +437,6 @@ public class DataStore {
     this.store.remove(dataframeName);
   }
 
-
   public String expandProperties(String valueToExpand) {
     Pattern p = Pattern.compile("\\$\\{sys:(.+?)\\}");
     Matcher m = p.matcher(valueToExpand);
@@ -445,7 +444,7 @@ public class DataStore {
     while (m.find()) {
       String key = m.group(1);
       if (key != null) {
-                String value = System.getProperty(key);
+        String value = System.getProperty(key);
         if (value != null) {
           m.appendReplacement(sb, value);
         }

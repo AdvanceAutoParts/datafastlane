@@ -165,6 +165,7 @@
         <configuration>
           <executable>java</executable>
           <arguments>
+            <argument>--illegal-access=permit</argument>          
             <argument>-classpath</argument>
             <classpath />
             <argument>com.advancestores.enterprisecatalog.datafastlane.app.DataFastLaneApp</argument>

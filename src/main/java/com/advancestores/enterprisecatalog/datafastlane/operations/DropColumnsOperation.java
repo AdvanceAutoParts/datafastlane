@@ -77,7 +77,7 @@ public class DropColumnsOperation extends CoreOperation {
     // real run!
     String[] cols = columnAsOneString.split(getOptionSeparator());
     List<String> colArray = Arrays.asList(cols);
-    log.info(
+    log.debug(
         "Will remove {} columns [{}] from raw columns [{}] using separator [{}]",
         colArray.size(), colArray, columnAsOneString, getOptionSeparator());
     for (int i = 0; i < cols.length; i++) {

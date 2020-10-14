@@ -18,79 +18,82 @@ import com.advancestores.enterprisecatalog.datafastlane.util.Utils;
  * Property values will support variable interpolation by default.
  */
 public abstract class BaseContext {
-    private static final Logger log = LoggerFactory.getLogger(BaseContext.class);
+  private static final Logger log =
+      LoggerFactory.getLogger(BaseContext.class);
 
-    protected static final List<String> PROTECTED_PROPERTIES = Arrays.asList("password", "secret", "jwt", "credentials",
-                                                                             "access", "arn");
+  protected static final List<String> PROTECTED_PROPERTIES =
+      Arrays.asList("password", "secret", "jwt", "credentials",
+          "access", "arn");
 
-    private Map<String, String> properties = new HashMap<>();
-    transient StringSubstitutor interpolator;
+  private Map<String, String> properties = new HashMap<>();
+  transient StringSubstitutor interpolator;
 
-    public BaseContext() {
-        properties = new HashMap<>();
-        interpolator = Utils.getInterpolatorInstance();
+  public BaseContext() {
+    properties = new HashMap<>();
+    interpolator = Utils.getInterpolatorInstance();
+  }
+
+  /**
+   * filter out properties that should not be exposed in the log.
+   */
+  public String toString() {
+    HashMap<String, String> tmpMap = new HashMap<>();
+
+    for (String key : getPropertyKeys()) {
+      if (!PROTECTED_PROPERTIES.contains(key.toLowerCase())) {
+        tmpMap.put(key, properties.get(key));
+      } else {
+        tmpMap.put(key, "************");
+      }
     }
 
-    /**
-     * filter out properties that should not be exposed in the log.
-     */
-    public String toString() {
-        HashMap<String, String> tmpMap = new HashMap<>();
+    return Utils.getGson().toJson(tmpMap);
+  }
 
-        for (String key : getPropertyKeys()) {
-            if (!PROTECTED_PROPERTIES.contains(key.toLowerCase())) {
-                tmpMap.put(key, properties.get(key));
-            }
-            else {
-                tmpMap.put(key, "************");
-            }
-        }
-
-        return Utils.getGson().toJson(tmpMap);
+  public BaseContext addProperty(Option option) {
+    if (option != null) {
+      addProperty(option.getKey(), option.getValue());
     }
 
-    public BaseContext addProperty(Option option) {
-        if (option != null) {
-            addProperty(option.getKey(), option.getValue());
-        }
+    return this;
+  }
 
-        return this;
+  public BaseContext addProperty(String key, String value) {
+    if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(value)) {
+      try {
+        properties.put(key, interpolator.replace(value));
+      } catch (Exception e) {
+        String errMsg =
+            "An exception occurred while adding property with key '" + key +
+                "'. This could mean an expected variable subsitution failed.  Ensure "
+                +
+                "variables/properties are properly set.";
+
+        log.error(errMsg);
+        throw new FastLaneException(errMsg);
+      }
     }
 
-    public BaseContext addProperty(String key, String value) {
-        if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(value)) {
-            try {
-                properties.put(key, interpolator.replace(value));
-            }
-            catch (Exception e) {
-                String errMsg = "An exception occurred while adding property with key '" + key +
-                                "'. This could mean an expected variable subsitution failed.  Ensure " +
-                                "variables/properties are properly set.";
+    return this;
+  }
 
-                log.error(errMsg);
-                throw new FastLaneException(errMsg);
-            }
-        }
+  public String getProperty(String key) {
+    return getProperty(key, null);
+  }
 
-        return this;
-    }
+  public String getProperty(String key, String defaultValue) {
+    String value =
+        StringUtils.isNotEmpty(key) ? properties.get(key) : defaultValue;
 
-    public String getProperty(String key) {
-        return getProperty(key, null);
-    }
+    return (StringUtils.isNotEmpty(value) ? value : defaultValue);
+  }
 
-    public String getProperty(String key, String defaultValue) {
-        String value = StringUtils.isNotEmpty(key) ? properties.get(key) : defaultValue;
+  public String[] getPropertyKeys() {
+    return properties.keySet().toArray(new String[properties.size()]);
+  }
 
-        return (StringUtils.isNotEmpty(value) ? value : defaultValue);
-    }
-
-    public String[] getPropertyKeys() {
-        return properties.keySet().toArray(new String[properties.size()]);
-    }
-
-    public boolean containsKey(String key) {
-        return (getProperty(key) != null);
-    }
+  public boolean containsKey(String key) {
+    return (getProperty(key) != null);
+  }
 
 }

@@ -21,34 +21,35 @@ import com.advancestores.enterprisecatalog.datafastlane.DataTransformer;
  */
 class CsvWithCustomSchemaTransformLoadTest {
 
-    @Test
-    void test() {
-        DataStore store = new DataStore("src/test/resources/recipe-csv-custom-schema.yaml");
+  @Test
+  void test() {
+    DataStore store =
+        new DataStore("src/test/resources/recipe-csv-custom-schema.yaml");
 
-        assertTrue(DataTransformer.transform(store));
+    assertTrue(DataTransformer.transform(store));
 
-        Dataset<Row> ds = store.get("buyersguide");
+    Dataset<Row> ds = store.get("buyersguide");
 
-        assertNotNull(ds);
-        long dsRowCount = ds.count();
+    assertNotNull(ds);
+    long dsRowCount = ds.count();
 
-        assertTrue(dsRowCount > 0);
+    assertTrue(dsRowCount > 0);
 
-        String filename = "data/buyersguide/PROD_BUYERS_GUIDE_SAMPLE.csv";
-        long fileRowCount = 0;
+    String filename = "data/buyersguide/PROD_BUYERS_GUIDE_SAMPLE.csv";
+    long fileRowCount = 0;
 
-        try {
-            Path path = Paths.get(filename);
-            fileRowCount = Files.lines(path).count();
-        }
-        catch (Exception e) {
-            fail("Unable to count lines in file '" + filename + "'.\n" + e.getMessage());
-        }
-
-        // subtract 1 for header row
-        fileRowCount--;
-
-        assertEquals(fileRowCount, dsRowCount);
+    try {
+      Path path = Paths.get(filename);
+      fileRowCount = Files.lines(path).count();
+    } catch (Exception e) {
+      fail("Unable to count lines in file '" + filename + "'.\n"
+          + e.getMessage());
     }
+
+    // subtract 1 for header row
+    fileRowCount--;
+
+    assertEquals(fileRowCount, dsRowCount);
+  }
 
 }
