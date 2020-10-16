@@ -9,8 +9,9 @@ Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, 
 
 DFL is:
 
- @ @fa-gamepad-alt Easy
+ * @fa-gamepad-alt Easy
  * @fa-user-cowboy Standalone
+ * !(https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/address-card.svg)
 
 ## Installation and first execution
 
