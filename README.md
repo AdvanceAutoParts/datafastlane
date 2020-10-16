@@ -11,7 +11,10 @@ DFL is:
 
  * @fa-gamepad-alt Easy
  * @fa-user-cowboy Standalone
- * !(https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/address-card.svg)
+ * ![](https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/address-card.svg)
+ * Scriptable: You can use DFL within scripts on the command line, you can start by having a look at the `dfl.sh` script and hack your way from there.
+ * Embeddable: Use DFL as a framework and embed it directly in your Java/Scala apps as a Jar.
+ 
 
 ## Installation and first execution
 
