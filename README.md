@@ -9,9 +9,8 @@ Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, 
 
 DFL is:
 
- * @fa-gamepad-alt Easy
- * @fa-user-cowboy Standalone
- * ![](https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/address-card.svg)
+ * Easy
+ * Standalone
  * Scriptable: You can use DFL within scripts on the command line, you can start by having a look at the `dfl.sh` script and hack your way from there.
  * Embeddable: Use DFL as a framework and embed it directly in your Java/Scala apps as a Jar.
  
@@ -34,10 +33,9 @@ The execution returns:
 
 ```
 ...
-2020-09-08 16:29:26.737 - INFO --- [           main] eaderContext.load(ReaderContext.java:45): >>>> Loading books from file data/books/books.csv
-2020-09-08 16:29:30.824 - INFO --- [           main] eaderContext.load(ReaderContext.java:49): >>>> Load completed in 4 seconds
-2020-09-08 16:29:31.384 - INFO --- [           main] peration.run(CountRowsOperation.java:35): books has 24 row(s)
-2020-09-08 16:29:31.384 - INFO --- [           main] astLaneApp.main(DataFastLaneApp.java:98): DataFastLaneApp completed in 8 seconds with a status of true.
+DataFastLaneApp is starting and will process recipe: ./src/test/resources/recipe-count-books.yaml
+2020-10-16 10:23:42.666 - INFO --- [           main] peration.run(CountRowsOperation.java:36): books has 24 row(s)
+DFL completed in 9.2s with a status of true.
 ```
 
 ## Advanced usage
