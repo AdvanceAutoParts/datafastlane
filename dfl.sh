@@ -26,5 +26,5 @@ if [[ "$_java" ]]; then
     fi
 fi
 
-mvn -q exec:exec -Dexec.workingdir=$BASEDIR -Dexec.executable=_java -DADD_ARGS="$*" -Dlog4j.configuration=file:$BASEDIR/src/main/resources/log4j.properties -Dmaven.test.skip=true
+mvn -q exec:exec -Dexec.workingdir=$BASEDIR -Dexec.executable=_java -DADD_ARGS="$*" -Dlog4j.configuration=file:$BASEDIR/src/main/resources/log4j.properties -Dmaven.test.skip=true 2>/dev/null
 cd $ORIGDIR

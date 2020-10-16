@@ -2,11 +2,15 @@
 
 ## What can I do with Data in the Fast Lane (DFL)?
 
+Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, transform, and load (ETL) operations. DFL differentiates itself from other ETL tools as it focuses on scaling thanks to its backing by Apache Spark. DFL does not require any specific infrastructure, it can run on a laptop or leveraging containers in a cloud environment. It can run standalone or embedded in an application. Finally, it is designed to be extensible, with both the data transformation recipes and extension supporting source control.
+
+
 ![What can I do with Data in the Fast Lane](https://github.com/AdvanceAutoParts/datafastlane/blob/master/doc/what_can_i_do_with_data_in_the_fast_lane_dfl.png?raw=true)
 
-## What is Data in the Fast Lane (DFL)?
+DFL is:
 
-TBD
+ @ @fa-gamepad-alt Easy
+ * @fa-user-cowboy Standalone
 
 ## Installation and first execution
 

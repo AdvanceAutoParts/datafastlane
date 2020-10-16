@@ -117,12 +117,12 @@ public class DataFastLaneApp {
 
         // TODO add support for a silent / quiet mode
         System.out.printf(
-            "DFL completed in %.1f seconds with a status of %b.",
-            ((System.currentTimeMillis() - transformStart) / 1000), status);
+            "DFL completed in %.1fs with a status of %b.\n",
+            (System.currentTimeMillis() - transformStart) / 1000.0, status);
 
         log.debug(
-            "DFL completed in {} seconds with a status of {}.",
-            ((System.currentTimeMillis() - transformStart) / 1000), status);
+            "DFL completed in {}s with a status of {}.",
+            (System.currentTimeMillis() - transformStart) / 1000.0, status);
 
         log.debug("Dataframe Count: {}", store.getDataframeCount());
         log.trace("\nRecipe:\n{}\n", store.getRecipe());

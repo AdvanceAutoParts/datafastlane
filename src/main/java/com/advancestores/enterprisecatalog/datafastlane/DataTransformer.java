@@ -116,7 +116,7 @@ public class DataTransformer {
         log.warn("No session attribute defined for the Spark container.");
       }
     } else {
-      log.warn("Spark container is null.");
+      log.debug("Spark container is null, which may be ok.");
     }
 
     return ctx;
