@@ -9,17 +9,17 @@ Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, 
 
 DFL is:
 
- * Easy
- * Open Source
- * Fast
- * Standalone
+ * Easy: we are not going to lie to you, every tool has its learning curve, but we have some great documentation in the [doc](https://github.com/AdvanceAutoParts/datafastlane/tree/master/doc) folder and you'll see more soon on [Medium](http://medium.com/AdvanceOSS) and [DZone](http://dzone.com). 
+ * Open Source: duh...
+ * Fast: Leverages Apache Spark, which is pretty fast.
+ * Standalone: yeah, you don't need to add complex components, runtimes, gateway, or even license servers...
  * Scriptable: You can use DFL within scripts on the command line, you can start by having a look at the `dfl.sh` script and hack your way from there.
  * Embeddable: Use DFL as a framework and embed it directly in your Java/Scala apps as a Jar.
- * Scalable
- * Extensible
- * Source control
- * Container
- * Cloud-ready
+ * Scalable: have you heard of Spark's legendary scalability? We're just like that.
+ * Extensible: Add your own transformations! From generating unique id from several secondary keys to pivoting aggregates, we got some pretty advanced transformations covered; but you will be able to add your very own!
+ * Source control: you can source control everything in DFL: your data transformations and your extensions. No need to copy-paste stuff to extend your data pipelines!
+ * Container: DFL runs like a charm in a container, as you'd expect, no?
+ * Cloud-ready: running in a container is not enough, a cloud-ready application also needs to leverage cloud-native resources, and that's what DFL does!
 
 ## Installation and first execution
 
@@ -38,7 +38,6 @@ Where your recipe file is a YAML file, like in:
 The execution returns: 
 
 ```
-...
 DataFastLaneApp is starting and will process recipe: ./src/test/resources/recipe-count-books.yaml
 2020-10-16 10:23:42.666 - INFO --- [           main] peration.run(CountRowsOperation.java:36): books has 24 row(s)
 DFL completed in 9.2s with a status of true.
