@@ -10,7 +10,7 @@ Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, 
 DFL is:
 
  * Easy: we are not going to lie to you, every tool has its learning curve, but we have some great documentation in the [doc](https://github.com/AdvanceAutoParts/datafastlane/tree/master/doc) folder and you'll see more soon on [Medium](http://medium.com/AdvanceOSS) and [DZone](http://dzone.com). 
- * Open Source: duh...
+ * Open Source: duh... and we picked a business-friendly Apache 2.0 license so you can innovate on top of our innovation with serenity.
  * Fast: Leverages Apache Spark, which is pretty fast.
  * Standalone: yeah, you don't need to add complex components, runtimes, gateway, or even license servers...
  * Scriptable: You can use DFL within scripts on the command line, you can start by having a look at the `dfl.sh` script and hack your way from there.
