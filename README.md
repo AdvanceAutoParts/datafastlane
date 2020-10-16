@@ -10,10 +10,16 @@ Data in the Fast Lane (DFL) is a data-oriented tool, design to perform extract, 
 DFL is:
 
  * Easy
+ * Open Source
+ * Fast
  * Standalone
  * Scriptable: You can use DFL within scripts on the command line, you can start by having a look at the `dfl.sh` script and hack your way from there.
  * Embeddable: Use DFL as a framework and embed it directly in your Java/Scala apps as a Jar.
- 
+ * Scalable
+ * Extensible
+ * Source control
+ * Container
+ * Cloud-ready
 
 ## Installation and first execution
 
@@ -40,7 +46,7 @@ DFL completed in 9.2s with a status of true.
 
 ## Advanced usage
 
-DFL can also be used as a Java framework. Look at the following examples:
+DFL can also be used in an embedded way, as a Java framework. Look at the following examples:
 
  * `LoadShowLabApp`: executes a basic recipe.
  * `LoadShowTransformLabApp`: executes a recipe with a transformation.
