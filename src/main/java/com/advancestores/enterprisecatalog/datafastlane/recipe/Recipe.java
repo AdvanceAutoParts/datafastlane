@@ -41,9 +41,12 @@ public class Recipe {
       sb.append("***** ct .... ");
       sb.append(c.getContainerName());
       sb.append(":\n");
+      if (c.getAttributes() == null) {
+        sb.append("No attribute");
+      }else {
       for (Attribute t : c.getAttributes()) {
         sb.append(t.debug());
-      }
+      }}
     }
     return sb.toString();
   }

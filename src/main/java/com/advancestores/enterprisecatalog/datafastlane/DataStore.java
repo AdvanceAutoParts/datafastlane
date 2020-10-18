@@ -68,7 +68,9 @@ public class DataStore {
     log.debug("\nRECIPE: {}\n", recipe);
 
     int recipeCount = recipe.getContainers().size();
-    log.debug("{} rules to apply:\n{}", recipeCount, recipe.debug());
+    if (log.isDebugEnabled()) {
+      log.debug("{} rules to apply:\n{}", recipeCount, recipe.debug());
+    }
 
     // we can remove temp recipe files
     try {
@@ -422,6 +424,12 @@ public class DataStore {
     return connectionInstance;
   }
 
+  /**
+   * Drops a dataframe from the store and unpersists it if it was cached by
+   * Spark.
+   * 
+   * @param dataframeName
+   */
   public void drop(String dataframeName) {
     if (dataframeName == null) {
       return;
@@ -438,6 +446,10 @@ public class DataStore {
   }
 
   public String expandProperties(String valueToExpand) {
+    if (valueToExpand == null) {
+      log.warn("Trying to expand a null value, is that expected?");
+      return null;
+    }
     Pattern p = Pattern.compile("\\$\\{sys:(.+?)\\}");
     Matcher m = p.matcher(valueToExpand);
     StringBuffer sb = new StringBuffer();

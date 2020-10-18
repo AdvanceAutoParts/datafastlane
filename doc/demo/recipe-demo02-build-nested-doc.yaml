@@ -1,0 +1,49 @@
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: source_con
+    options:
+      driver: org.postgresql.Driver
+      url: jdbc:postgresql:advance_demo_db
+      user: AdvanceOSS
+      password: AdvanceOSS
+$store: 
+- attribute: books 
+  operations: 
+  - operation: load 
+    path: books 
+    format: jdbc 
+    options:
+      connection: source_con
+- attribute: authors 
+  operations: 
+  - operation: load 
+    path: authors
+    format: jdbc 
+    options:
+      connection: source_con
+books:
+- attribute: id
+  operations:
+  - operation: rename
+    to: bookId
+  - operation: countRows # count the rows
+  - operation: show # shows the content of the dataframe
+    options: 
+      numRows: 5
+      truncate: true
+  - operation: printSchema # print the dataframe's schema
+authors:
+- attribute: id
+  operations:
+  - operation: rename
+    to: authorId
+  - operation: countRows 
+  - operation: show 
+    options: 
+      numRows: 5
+      truncate: true
+  - operation: printSchema 
+books:
+
+      
