@@ -59,12 +59,16 @@ public class DataTransformer {
 
   private static boolean processRecipeOnTable(DataStore store,
       String tableName, Container recipe) {
-    List<Attribute> transformations = recipe.getAttributes();
+    List<Attribute> attributes = recipe.getAttributes();
 
+    if (attributes == null) {
+      log.warn("Found no attribute in this recipe.");
+      return true;
+    }
     // Apply all transformations, step by step
-    for (Attribute transformation : transformations) {
-      String columnName = transformation.getName();
-      List<Operation> operations = transformation.getOperations();
+    for (Attribute attribute : attributes) {
+      String columnName = attribute.getName();
+      List<Operation> operations = attribute.getOperations();
 
       for (Operation operation : operations) {
         CoreOperation op =

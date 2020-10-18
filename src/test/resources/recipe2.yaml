@@ -1,4 +1,6 @@
-# transform
+#
+# loads books.csv and authors.csb and join them
+# 
 $store: # container
 - attribute: books # attribute
   operations: # operations on the attribute

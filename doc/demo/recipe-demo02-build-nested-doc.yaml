@@ -27,17 +27,15 @@ books:
   operations:
   - operation: rename
     to: bookId
-  - operation: countRows # count the rows
-  - operation: show # shows the content of the dataframe
-    options: 
-      numRows: 5
-      truncate: true
-  - operation: printSchema # print the dataframe's schema
 authors:
 - attribute: id
   operations:
   - operation: rename
     to: authorId
+- attribute: link
+  operations:
+  - operation: rename
+    to: authorLink
   - operation: countRows 
   - operation: show 
     options: 
@@ -45,5 +43,26 @@ authors:
       truncate: true
   - operation: printSchema 
 books:
-
-      
+- attribute: authorId
+  operations:
+  - operation: join
+    with: authors 
+    on: authorId
+    type: left
+$store:
+- attribute: works 
+  operations:
+  - operation: nestedGroupBy
+    from: books
+    on: name, authorLink, wikipedia
+    nesting: title, releaseDate, link
+  - operation: countRows # count the rows
+  - operation: show # shows the content of the dataframe
+    options: 
+      numRows: 5
+      truncate: true
+  - operation: printSchema # print the dataframe's schema
+  - operation: save
+    format: json
+    path: /tmp/works.json
+    mode: Overwrite
