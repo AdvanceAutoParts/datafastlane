@@ -1,0 +1,82 @@
+$connection:
+- attribute: jdbc
+  operations:
+  - operation: destination
+    options:
+      driver: org.postgresql.Driver
+      url: jdbc:postgresql:advance_demo_db
+      user: AdvanceOSS
+      password: AdvanceOSS
+$schema:
+- attribute: books_schema
+  operations:
+  - operation: id
+    options:
+      datatype: integer
+  - operation: authorId
+    options:
+      datatype: integer
+  - operation: title
+    options:
+      datatype: string
+  - operation: releaseDate
+    options:
+      datatype: date
+  - operation: link
+    options:
+      datatype: string
+$store: # container
+- attribute: books # name of the dataframe in the store
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/books/books.csv # path to file
+    format: csv # format
+    schemaName: books_schema
+    options:
+      header: true # the file has a header
+      quote: '"'
+      dateFormat: M/d/y
+- attribute: authors 
+  operations: 
+  - operation: load 
+    path: data/books/authors.csv 
+    format: csv # format
+    options:
+      header: true # the file has a header
+      inferSchema: true # infer the schema
+books:
+- attribute: id
+  operations:
+  - operation: countRows # count the rows
+  - operation: show # shows the content of the dataframe
+    options: 
+      numRows: 5
+      truncate: true
+  - operation: printSchema # print the dataframe's schema
+authors:
+- attribute: id
+  operations:
+  - operation: countRows 
+  - operation: show 
+    options: 
+      numRows: 5
+      truncate: true
+  - operation: printSchema 
+$store: # Context is the store
+- attribute: books
+  operations:
+  - operation: save
+    format: jdbc
+    path: books
+    mode: Overwrite
+    options:
+      connection: destination
+- attribute: authors
+  operations:
+  - operation: save
+    format: jdbc
+    path: authors
+    mode: Overwrite
+    options:
+      connection: destination
+      
