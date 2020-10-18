@@ -7,6 +7,12 @@ $connection:
       url: jdbc:postgresql:advance_demo_db
       user: AdvanceOSS
       password: AdvanceOSS
+- attribute: org.elasticsearch.spark.sql
+  operations:
+  - operation: destination_con
+    options:
+      es.nodes: localhost
+      es.port: 9200
 $store: 
 - attribute: books 
   operations: 
@@ -66,3 +72,11 @@ $store:
     format: json
     path: /tmp/works.json
     mode: Overwrite
+    
+# Waiting for Elastic to support Spark v3, grrrr
+#  - operation: save
+#    format: org.elasticsearch.spark.sql
+#    path: works
+#    mode: Overwrite
+#    options:
+#      connection: destination_con
