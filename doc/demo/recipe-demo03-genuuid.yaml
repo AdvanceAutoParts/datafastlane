@@ -1,0 +1,23 @@
+$store: # container
+- attribute: products # attribute
+  operations: # operations on the attribute
+  - operation: load # operation (name)
+    path: data/product/filter.csv # path to file
+    format: csv # format
+    options:
+      header: true # the file has a header
+      inferSchema: true # infer the schema
+products:
+- attribute: id
+  operations:
+  - operation: show # shows the content of the dataframe
+    options: 
+      numRows: 3
+      truncate: true
+  - operation: genUuid
+    with: part_num, sku
+  - operation: show # shows the content of the dataframe
+    options: 
+      numRows: 3
+      truncate: true
+    
