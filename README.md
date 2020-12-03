@@ -53,6 +53,11 @@ DFL can also be used in an embedded way, as a Java framework. Look at the follow
 
 ## More documentation
 
+### Video demo
+
+ * [Introducing Advance Open Source Garage](https://youtu.be/EoZ202rX0kc) at All Things Open 2020.
+ * [DataFriday #23 - Boost your ETLs with Data in The Fast Lane](https://www.youtube.com/watch?v=DbEcrorW-BE) gives an intro to DFL.
+
 ### User manual
 
 The `doc` directory contains a Microsoft Word user manual. It will be replaced by markdown pages as we move along.
