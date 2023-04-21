@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <scala.version>2.12</scala.version>
-    <spark.version>3.0.1</spark.version>
+    <spark.version>3.4.0</spark.version>
     <jackson.version>2.10.0</jackson.version>
     <delta.version>0.4.0</delta.version>
     <elastic.version>7.5.1</elastic.version>
